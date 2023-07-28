@@ -29,6 +29,9 @@ Minimum Viable Product (MVP) definition.
 place for users to input ingredients
 output a recipe that includes at least one of the ingredients that the user input.
 
+## Wireframe
+![Dinner Planner Wireframe](https://github.com/KendraMcDaniels01/Dinner-Planner/assets/135636321/d34e3658-0075-4733-817b-bf5629682028)
+
 
 ## User Stories:
 
