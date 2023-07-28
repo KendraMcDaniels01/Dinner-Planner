@@ -32,6 +32,9 @@ output a recipe that includes at least one of the ingredients that the user inpu
 ## Wireframe
 ![Dinner Planner Wireframe](https://github.com/KendraMcDaniels01/Dinner-Planner/assets/135636321/d34e3658-0075-4733-817b-bf5629682028)
 
+## Domain Modeling
+![Domain Modeling](https://github.com/KendraMcDaniels01/Dinner-Planner/assets/135636321/93e77d1f-a25e-439b-bf77-fc71f36c56ed)
+
 
 ## User Stories:
 
