@@ -1,21 +1,5 @@
 # Dinner Planner Generator
 
-
-    
-Crafting Project
-
-
-Summary: A fake store front for crafting materials that has a page where you can create simple designs with the craft materials.
-What problem or pain point does it solve? Gives the user the ability
- to use the materials virtually before purchasing the items. 
-Minimum Viable Product (MVP) definition.
-
-list of products on a fake store page
-simple designing area for the products
-
-
-
-
 Dinner Planner
 
 
