@@ -27,7 +27,7 @@ let genButton = document.getElementById('generate-btn');
 let genDiv = document.getElementById('gen-output');
 let genDivLink = document.getElementById('link-output');
 let sorryMessage = document.createElement('p');
-
+let recipeHeader = document.getElementById('recipe-header');
 
 let userInputs = 0;
 
@@ -79,9 +79,10 @@ Dinner.prototype.shopping = function(){
 Dinner.prototype.display = function(){
   if(this.generate(userInputs)){
     imgOutput.src = this.picture;
-    imgOutput.title = this.name;
-    imgOutput.alt = this.name + ' image from foodnetwork.com';
+    imgOutput.title = this.name+ ' image from foodnetwork.com';
+    imgOutput.alt = this.name;
     this.shopping();
+    saveDinnerToLocalStorage(this);
     let recipeLink = document.createElement('a');
     recipeLink.href = 'recipe.html';
     recipeLink.innerHTML = 'Recipe';
@@ -110,10 +111,45 @@ function handleGenerate(event){
   burgerDinner.display();
 }
 
+function handleContentLoaded(event){
+  let dinner = getDinnerFromLocalStorage();
+
+  if (dinner) {
+    recipeHeader = dinner.name + ' Recipe';
+    let recipeImg = document.getElementById('recipe-img');
+    let recipeIngredients = document.getElementById('recipe-ingredients');
+
+    recipeImg.src = dinner.picture;
+    recipeImg.title = dinner.name+ ' image from foodnetwork.com';
+    recipeImg.alt = dinner.name;
+
+    for (let index = 0; index < dinner.arrayIng.length; index++){
+      let recipeIngredientItem = document.createElement('li');
+      recipeIngredientItem.textContent = dinner.arrayIng[index];
+      recipeIngredients.appendChild(recipeIngredientItem);
+    }
+  }
+}
+
+// Save dinner data in local storage
+function saveDinnerToLocalStorage(dinner) {
+  localStorage.setItem('dinnerData', JSON.stringify(dinner));
+}
+
+// Retrieve dinner data from local storage
+function getDinnerFromLocalStorage() {
+  let dinnerData = localStorage.getItem('dinnerData');
+  if (dinnerData) {
+    return JSON.parse(dinnerData);
+  }
+}
+
+
 
 
 
 // listener
-inputForm.addEventListener('submit',handleSubmit);
+document.addEventListener('DOMContentLoaded', handleContentLoaded); // got this event listener from chatgpt
+inputForm.addEventListener('submit', handleSubmit);
 genButton.addEventListener('click', handleGenerate);
 

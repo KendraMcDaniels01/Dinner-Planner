@@ -45,13 +45,32 @@ form#input-form input[type="text"] {
   margin-bottom: 10px;
 }
 
+ul/*#shopping */{
+  background-color: lightgoldenrodyellow;
+  height: 15vw;
+  padding: 10px;
+  flex: 1;
+}
+
+ul li:first-child {
+  padding-top: 20px;
+}
+
+ul li {
+  padding-top: 10px;
+}
+
 ul#user-ingredient {
   flex: 1;
-  list-style: none;
-  padding: 0;
   background-color: peachpuff;
-  padding: 10px;
+
 }
+
+ul#recipe-ingredients {
+  max-width: 33%; /* 1/3rd of the available space */
+  height: auto;
+}
+
 button {
   font-size: 16px;
   padding: 10px 20px;
@@ -78,20 +97,6 @@ div#gen-output img {
   margin-right: 20px;
 }
 
-ul#shopping {
-  background-color: lightgoldenrodyellow;
-  height: 15vw;
-  padding: 10px;
-  flex: 1;
-}
-
-ul li:first-child {
-  padding-top: 20px;
-}
-ul li {
-  padding-top: 10px;
-}
-
 div#gen-output a {
   display: block;
   text-align: center;
@@ -113,17 +118,6 @@ img#recipe-img {
   margin-right: 20px;
 }
 
-ul#recipe-ingredients {
-  list-style: none;
-  padding: 0;
-  max-width: 33%; /* 1/3rd of the available space */
-  background-color: #f7f7f7;
-  padding: 10px;
-}
-
-ul#recipe-ingredients li {
-  margin-bottom: 10px;
-}
 
 article#recipe-full {
   background-color: #f7f7f7;
