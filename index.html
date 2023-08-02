@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dinner Planner</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Dinner Planner Recipe Generator</h1>
+  <main>
+    <article id="instructions">
+      <p>User Instruction:<br> Please submit one cooking ingredient excluding common spices like salt or pepper as well as condiments. After submitting an ingredient, click the Generate Recipe button to get a recipe that inlcudes that ingredient.</p>
+    </article>
+  <!--code from W3Schools-->
+    <section id="input-section">
+      <form id="input-form">
+      Ingredient: <input type="text" id="userInput" placeholder = "ex. tomato"><br>
+      <button type="submit">Submit</button>
+      </form>
+      <ul id="user-ingredient">List of ingredients:</ul>
+    </section>
+    <div id="gen-btn-div">
+    <button id="generate-btn">Generate Recipe</button>
+    </div>
+    <div id="gen-output">
+      <img id="img-output" src="" alt="">
+    </div>
+    <div id="link-output"></div>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+<footer></footer>
+</html>

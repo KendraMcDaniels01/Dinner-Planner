@@ -1,0 +1,139 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  padding: 0;
+}
+
+h1 {
+  font-size: 3vw;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  margin: 20px;
+}
+a {
+  font-size: 20px;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+article#instructions {
+  background-color: #f7f7f7;
+  padding: 10px;
+}
+
+
+section#input-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+form#input-form {
+  flex: 1;
+  margin-right: 20px;
+  text-align: center;
+}
+
+form#input-form input[type="text"] {
+  width: 80%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+ul#user-ingredient {
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  background-color: peachpuff;
+  padding: 10px;
+}
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+div#gen-btn-div {
+  text-align: center;
+  margin: 10px;
+}
+
+div#gen-output {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+div#gen-output img {
+  flex: 1;
+  max-height: 15vw;
+  width: auto;
+  margin-right: 20px;
+}
+
+ul#shopping {
+  background-color: lightgoldenrodyellow;
+  height: 15vw;
+  padding: 10px;
+  flex: 1;
+}
+
+ul li:first-child {
+  padding-top: 20px;
+}
+ul li {
+  padding-top: 10px;
+}
+
+div#gen-output a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+div#gen-output a:hover {
+  background-color: #0056b3;
+}
+
+section {
+  display: flex;
+}
+
+img#recipe-img {
+  max-width: 66%; /* 2/3rds of the available space */
+  height: auto;
+  margin-right: 20px;
+}
+
+ul#recipe-ingredients {
+  list-style: none;
+  padding: 0;
+  max-width: 33%; /* 1/3rd of the available space */
+  background-color: #f7f7f7;
+  padding: 10px;
+}
+
+ul#recipe-ingredients li {
+  margin-bottom: 10px;
+}
+
+article#recipe-full {
+  background-color: #f7f7f7;
+  padding: 20px;
+  margin: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
