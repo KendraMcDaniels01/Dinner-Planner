@@ -11,12 +11,13 @@ h1 {
   text-align: center;
   margin: 20px;
 }
+
 a {
   font-size: 20px;
 }
 
 main {
-  max-width: 800px;
+  max-width: 80%;
   margin: 0 auto;
   padding: 20px;
 }
@@ -45,7 +46,7 @@ form#input-form input[type="text"] {
   margin-bottom: 10px;
 }
 
-ul/*#shopping */{
+ul {
   background-color: lightgoldenrodyellow;
   height: 15vw;
   padding: 10px;
@@ -67,7 +68,7 @@ ul#user-ingredient {
 }
 
 ul#recipe-ingredients {
-  max-width: 33%; /* 1/3rd of the available space */
+  max-width: 33%; 
   height: auto;
 }
 
@@ -92,9 +93,12 @@ div#gen-output {
 
 div#gen-output img {
   flex: 1;
-  max-height: 15vw;
-  width: auto;
-  margin-right: 20px;
+  background-color: lightgoldenrodyellow;
+  border: 5px solid lightgoldenrodyellow;
+  width: 15vw;
+  height: 15vw;
+  object-fit: scale-down;
+  margin: auto;
 }
 
 div#gen-output a {
@@ -113,16 +117,14 @@ section {
 }
 
 img#recipe-img {
-  max-width: 66%; /* 2/3rds of the available space */
+  max-width: 66%; 
   height: auto;
   margin-right: 20px;
 }
 
-
-article#recipe-full {
-  background-color: #f7f7f7;
-  padding: 20px;
-  margin: 20px;
+#recipe-full {
+  width: 100%;
+  height: 600px; 
 }
 
 footer {

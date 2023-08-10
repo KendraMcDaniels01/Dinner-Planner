@@ -20,27 +20,29 @@ Step 3. Stretch goals
 */
 
 // grab html elements
-let imgOutput = document.getElementById('img-output');
+/* let imgOutput = document.getElementById('img-output'); */
 let inputForm = document.getElementById('input-form');
 let inputList = document.getElementById('user-ingredient');
 let genButton = document.getElementById('generate-btn');
 let genDiv = document.getElementById('gen-output');
 let genDivLink = document.getElementById('link-output');
 let sorryMessage = document.createElement('p');
-let recipeHeader = document.getElementById('recipe-header');
+
 
 let userInputs = 0;
 
 
 // constructor and objects
-function Dinner(name, ingList, fileExtension ='jpeg') {
+function Dinner(name, ingList) {
   this.name = name;
-  this.picture = 'img/'+ name +'.'+fileExtension;
+  this.picture = 'img/'+ name +'.jpeg';
   this.arrayIng = ingList;
+  this.recipePdf = 'pdf/'+ name +'.pdf';
 }
 
 let burgerIngList = ['ground beef','cheese','hamburger buns','tomato','lettuce'];
-let burgerDinner = new Dinner('burger', burgerIngList, 'jpeg');
+let burgerDinner = new Dinner('burger', burgerIngList);
+
 
 function checkIngredient(x){
   return x !== userInputs;
@@ -78,10 +80,13 @@ Dinner.prototype.shopping = function(){
 
 Dinner.prototype.display = function(){
   if(this.generate(userInputs)){
+    let imgOutput = document.createElement('img');
     imgOutput.src = this.picture;
     imgOutput.title = this.name+ ' image from foodnetwork.com';
     imgOutput.alt = this.name;
+    genDiv.appendChild(imgOutput);
     this.shopping();
+    console.log(this);
     saveDinnerToLocalStorage(this);
     let recipeLink = document.createElement('a');
     recipeLink.href = 'recipe.html';
@@ -91,7 +96,6 @@ Dinner.prototype.display = function(){
     message();
   }
 };
-
 
 // event handlers
 function handleSubmit(event){
@@ -115,10 +119,13 @@ function handleContentLoaded(event){
   let dinner = getDinnerFromLocalStorage();
 
   if (dinner) {
-    recipeHeader = dinner.name + ' Recipe';
+    let recipeHeader = document.getElementById('recipe-header');
+    recipeHeader.textContent = dinner.name + ' Recipe';
     let recipeImg = document.getElementById('recipe-img');
     let recipeIngredients = document.getElementById('recipe-ingredients');
+    let recipePdf = document.getElementById('recipe-full');
 
+    recipePdf.src = dinner.recipePdf;
     recipeImg.src = dinner.picture;
     recipeImg.title = dinner.name+ ' image from foodnetwork.com';
     recipeImg.alt = dinner.name;
@@ -143,10 +150,6 @@ function getDinnerFromLocalStorage() {
     return JSON.parse(dinnerData);
   }
 }
-
-
-
-
 
 // listener
 document.addEventListener('DOMContentLoaded', handleContentLoaded); // got this event listener from chatgpt
