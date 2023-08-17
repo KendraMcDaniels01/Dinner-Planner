@@ -84,8 +84,16 @@ div#gen-btn-div {
   margin: 10px;
 }
 
+h2 {
+  font-size: 2vw;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  margin: 20px;
+}
 div#gen-output {
   margin: 20px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items:center;
@@ -95,10 +103,9 @@ div#gen-output img {
   flex: 1;
   background-color: lightgoldenrodyellow;
   border: 5px solid lightgoldenrodyellow;
-  width: 15vw;
+  width: 10vw;
   height: 15vw;
   object-fit: scale-down;
-  margin: auto;
 }
 
 div#gen-output a {

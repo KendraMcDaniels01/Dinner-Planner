@@ -30,18 +30,25 @@ let sorryMessage = document.createElement('p');
 
 
 let userInputs = 0;
+let arrayOfDinners = [];
 
 
 // constructor and objects
-function Dinner(name, ingList) {
+function Dinner(name, ingList, title) {
   this.name = name;
+  this.title = title;
   this.picture = 'img/'+ name +'.jpeg';
   this.arrayIng = ingList;
   this.recipePdf = 'pdf/'+ name +'.pdf';
+  arrayOfDinners.push(this);
 }
 
 let burgerIngList = ['ground beef','cheese','hamburger buns','tomato','lettuce'];
-let burgerDinner = new Dinner('burger', burgerIngList);
+let chickenparmesanIngList = ['chicken breast', 'bread crumbs', 'eggs', 'marinara sauce', 'cheese'];
+let stuffedgreenpepperIngList = ['bell pepper', 'ground beef', 'cheese', 'tomato', 'eggs', 'bread crumbs'];
+let burgerDinner = new Dinner('burger', burgerIngList, 'Burgers');
+let chickenparmesanDinner = new Dinner('chickenparmesan', chickenparmesanIngList, 'Chicken Parmesan');
+let stuffedgreenpepperDinner = new Dinner('stuffedgreenpepper',stuffedgreenpepperIngList, 'Stuffed Green Peppers');
 
 
 function checkIngredient(x){
@@ -79,22 +86,21 @@ Dinner.prototype.shopping = function(){
 };
 
 Dinner.prototype.display = function(){
-  if(this.generate(userInputs)){
-    let imgOutput = document.createElement('img');
-    imgOutput.src = this.picture;
-    imgOutput.title = this.name+ ' image from foodnetwork.com';
-    imgOutput.alt = this.name;
-    genDiv.appendChild(imgOutput);
-    this.shopping();
-    console.log(this);
-    saveDinnerToLocalStorage(this);
-    let recipeLink = document.createElement('a');
-    recipeLink.href = 'recipe.html';
-    recipeLink.innerHTML = 'Recipe';
-    genDivLink.appendChild(recipeLink);
-  } else {
-    message();
-  }
+  let genDinnerTitle = document.getElementById('gen-heading');
+  let imgOutput = document.createElement('img');
+  genDinnerTitle.innerText = this.title;
+  imgOutput.src = this.picture;
+  imgOutput.title = this.title+ ' image from foodnetwork.com';
+  imgOutput.alt = this.title;
+  genDiv.appendChild(imgOutput);
+  this.shopping();
+  console.log(this);
+  saveDinnerToLocalStorage(this);
+  let recipeLink = document.createElement('a');
+  recipeLink.href = 'recipe.html';
+  recipeLink.innerHTML = 'Recipe';
+  genDivLink.appendChild(recipeLink);
+
 };
 
 // event handlers
@@ -112,23 +118,33 @@ function handleGenerate(event){
   if(inputForm.contains(sorryMessage)){
     inputForm.removeChild(sorryMessage);
   }
-  burgerDinner.display();
+  let generatedRecipe = '';
+  for (let index = 0; index < arrayOfDinners.length; index++) {
+    if(arrayOfDinners[index].generate(userInputs)){
+      generatedRecipe = arrayOfDinners[index];
+      break;
+    }
+  }
+  if(generatedRecipe === ''){
+    message();
+  } else {
+    generatedRecipe.display();
+  }
 }
 
 function handleContentLoaded(event){
   let dinner = getDinnerFromLocalStorage();
-
   if (dinner) {
     let recipeHeader = document.getElementById('recipe-header');
-    recipeHeader.textContent = dinner.name + ' Recipe';
+    recipeHeader.textContent = dinner.title + ' Recipe';
     let recipeImg = document.getElementById('recipe-img');
     let recipeIngredients = document.getElementById('recipe-ingredients');
     let recipePdf = document.getElementById('recipe-full');
 
     recipePdf.src = dinner.recipePdf;
     recipeImg.src = dinner.picture;
-    recipeImg.title = dinner.name+ ' image from foodnetwork.com';
-    recipeImg.alt = dinner.name;
+    recipeImg.title = dinner.title+ ' image from foodnetwork.com';
+    recipeImg.alt = dinner.title;
 
     for (let index = 0; index < dinner.arrayIng.length; index++){
       let recipeIngredientItem = document.createElement('li');
