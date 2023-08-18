@@ -8,21 +8,21 @@ X function to check user input with ingredients array for recipe object
 X function to display the missing ingredients (function to push into an array while leaving out the ingredient that the user input), the img for the recipe, link to full recipe page
 ----
 Step 2.
-* add in more recipe objects
-* push into an array
-* redo function to check all object ingredient arrays
+X add in more recipe objects
+X push into an array
+X redo function to check all object ingredient arrays
 ----
 Step 3. Stretch goals
 * add in the option for the user to input more than one ingredient (input into an array)
 * rework function to check for recipe match with the user ingredient array (nested loop)
 * have the function pick the best recipe
-*regenerate button
+* regenerate button
 */
 
 // grab html elements
-/* let imgOutput = document.getElementById('img-output'); */
 let inputForm = document.getElementById('input-form');
 let inputList = document.getElementById('user-ingredient');
+let deleteButton = document.getElementById('delete-btn');
 let genButton = document.getElementById('generate-btn');
 let genDiv = document.getElementById('gen-output');
 let genDivLink = document.getElementById('link-output');
@@ -56,7 +56,7 @@ function checkIngredient(x){
 }
 
 function message(){
-  let sorryMessage = document.createElement('p');
+ // let sorryMessage = document.createElement('p');
   sorryMessage.textContent = 'Sorry, no match found. Try again with a new ingredient.';
   inputForm.appendChild(sorryMessage);
 }
@@ -94,7 +94,6 @@ Dinner.prototype.display = function(){
   imgOutput.alt = this.title;
   genDiv.appendChild(imgOutput);
   this.shopping();
-  console.log(this);
   saveDinnerToLocalStorage(this);
   let recipeLink = document.createElement('a');
   recipeLink.href = 'recipe.html';
@@ -115,7 +114,7 @@ function handleSubmit(event){
 
 function handleGenerate(event){
   event.preventDefault();
-  if(inputForm.contains(sorryMessage)){
+  if (inputForm.contains(sorryMessage)) {
     inputForm.removeChild(sorryMessage);
   }
   let generatedRecipe = '';
@@ -126,7 +125,9 @@ function handleGenerate(event){
     }
   }
   if(generatedRecipe === ''){
-    message();
+    if (!inputForm.contains(sorryMessage)) {
+      message();
+    }
   } else {
     generatedRecipe.display();
   }
@@ -154,6 +155,13 @@ function handleContentLoaded(event){
   }
 }
 
+function handleDelete() {
+  if(inputList.lastChild.textContent !== 'List of ingredients:'){
+    inputList.removeChild(inputList.lastChild);
+  }
+  userInputs = 0;
+}
+
 // Save dinner data in local storage
 function saveDinnerToLocalStorage(dinner) {
   localStorage.setItem('dinnerData', JSON.stringify(dinner));
@@ -171,4 +179,6 @@ function getDinnerFromLocalStorage() {
 document.addEventListener('DOMContentLoaded', handleContentLoaded); // got this event listener from chatgpt
 inputForm.addEventListener('submit', handleSubmit);
 genButton.addEventListener('click', handleGenerate);
+deleteButton.addEventListener('click', handleDelete);
+
 
