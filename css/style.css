@@ -129,6 +129,11 @@ div#gen-output a:hover {
   background-color: #0056b3;
 }
 
+a {
+  margin: 20px;
+  font-size: 18px;
+}
+
 section {
   display: flex;
   margin: 20px;
