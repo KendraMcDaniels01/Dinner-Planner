@@ -79,6 +79,8 @@ Dinner.prototype.shopping = function(){
   listOutput.setAttribute('id','shopping');
   listOutput.textContent = 'Shopping List:';
   genDiv.appendChild(listOutput);
+  genDiv.style.borderRadius = '8px';
+  genDiv.style.backgroundColor = 'lightgoldenrodyellow';
   for (let index = 0; index < shoppingList.length; index++){
     let shoppingListItem = document.createElement('li');
     shoppingListItem.textContent = shoppingList[index];
@@ -91,6 +93,7 @@ Dinner.prototype.display = function(){
   let genDinnerTitle = document.getElementById('gen-heading');
   let imgOutput = document.createElement('img');
   genDinnerTitle.innerText = this.title;
+  genDinnerTitle.style.padding = '10px';
   imgOutput.src = this.picture;
   imgOutput.title = this.title+ ' image from foodnetwork.com';
   imgOutput.alt = this.title;
