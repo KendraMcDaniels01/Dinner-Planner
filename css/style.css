@@ -22,6 +22,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 15px;
 }
 
 article {
@@ -54,6 +55,7 @@ ul {
   height: 180px;
   border-radius: 8px;
   text-align: center;
+  font-size: 18px;
 }
 
 
@@ -63,13 +65,15 @@ ul#user-ingredient {
   margin: 10px;
 }
 
+ul li {
+  padding-top: 10px;
+  font-size: 15px;
+}
+
 ul li:first-child {
   padding-top: 20px;
 }
 
-ul li {
-  padding-top: 10px;
-}
 
 #shopping {
   margin: 20px;
@@ -116,6 +120,7 @@ div#gen-output img {
 div#gen-output a {
   display: block;
   text-align: center;
+  font-size: 18px;
   padding: 10px;
   margin: 10px;
 }
@@ -126,6 +131,10 @@ div#gen-output a:hover {
 
 section {
   display: flex;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: lightgoldenrodyellow;
 }
 
 img#recipe-img {
@@ -134,9 +143,14 @@ img#recipe-img {
   margin-right: 20px;
 }
 
+#recipe-article {
+  width: 75%;
+  height: 600px;
+}
+
 #recipe-full {
   width: 100%;
-  height: 600px; 
+  height: 600px;
 }
 
 footer {
@@ -144,5 +158,6 @@ footer {
   color: #fff;
   text-align: center;
   padding: 10px;
+  margin: 10px;
 }
 
