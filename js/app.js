@@ -13,8 +13,8 @@ X push into an array
 X redo function to check all object ingredient arrays
 ----
 Step 3. Stretch goals
-* add in the option for the user to input more than one ingredient (input into an array)
-* rework function to check for recipe match with the user ingredient array (nested loop)
+X add in the option for the user to input more than one ingredient (input into an array)
+X rework function to check for recipe match with the user ingredient array (nested loop)
 * have the function pick the best recipe
 * regenerate button
 */
@@ -28,8 +28,8 @@ let genDiv = document.getElementById('gen-output');
 let genDivLink = document.getElementById('link-output');
 let sorryMessage = document.createElement('p');
 
-
-let userInputs = 0;
+// globals
+let userInputs = [];
 let arrayOfDinners = [];
 
 
@@ -46,31 +46,32 @@ function Dinner(name, ingList, title) {
 let burgerIngList = ['ground beef','cheese','hamburger buns','tomato','lettuce'];
 let chickenparmesanIngList = ['chicken breast', 'bread crumbs', 'eggs', 'marinara sauce', 'cheese'];
 let stuffedgreenpepperIngList = ['bell pepper', 'ground beef', 'cheese', 'tomato', 'eggs', 'bread crumbs'];
-let burgerDinner = new Dinner('burger', burgerIngList, 'Burgers');
+let burgerDinner = new Dinner('burger', burgerIngList, 'Hamburgers');
 let chickenparmesanDinner = new Dinner('chickenparmesan', chickenparmesanIngList, 'Chicken Parmesan');
 let stuffedgreenpepperDinner = new Dinner('stuffedgreenpepper',stuffedgreenpepperIngList, 'Stuffed Green Peppers');
 
 
-function checkIngredient(x){
+function checkIngredient(x){ // function code from W3Schools
   return x !== userInputs;
 }
 
-function message(){
- // let sorryMessage = document.createElement('p');
-  sorryMessage.textContent = 'Sorry, no match found. Try again with a new ingredient.';
+function message(type){
+  if(type === 'match'){
+    sorryMessage.textContent = 'Sorry, no match found. Try again with a new ingredient.';
+  } else {
+    sorryMessage.textContent = 'Sorry, only up to 5 ingredients.';
+  }
   inputForm.appendChild(sorryMessage);
 }
 
 //prototype functions
+
+
 Dinner.prototype.generate = function(userIngredients){
-  let recipeMatch = false;
-  for (let index = 0; index < this.arrayIng.length; index++){
-    if (userIngredients === this.arrayIng[index])
-      recipeMatch = true;
-  }
-  return recipeMatch;
+  return this.arrayIng.includes(userIngredients);
 };
 
+// displays all ingredients for the recipe except the user inputs
 Dinner.prototype.shopping = function(){
   let shoppingList = this.arrayIng;
   shoppingList = shoppingList.filter(checkIngredient);
@@ -85,6 +86,7 @@ Dinner.prototype.shopping = function(){
   }
 };
 
+// displays recipe image, link to full recipe page, calls shopping function, and saves results to local storage
 Dinner.prototype.display = function(){
   let genDinnerTitle = document.getElementById('gen-heading');
   let imgOutput = document.createElement('img');
@@ -95,6 +97,9 @@ Dinner.prototype.display = function(){
   genDiv.appendChild(imgOutput);
   this.shopping();
   saveDinnerToLocalStorage(this);
+  while (genDivLink.firstChild) {
+    genDivLink.removeChild(genDivLink.firstChild);
+  }
   let recipeLink = document.createElement('a');
   recipeLink.href = 'recipe.html';
   recipeLink.innerHTML = 'Recipe';
@@ -105,28 +110,36 @@ Dinner.prototype.display = function(){
 // event handlers
 function handleSubmit(event){
   event.preventDefault();
-  let userIng = event.target.userInput.value;
-  userInputs = userIng.toLowerCase();
-  let inputListItem = document.createElement('li');
-  inputListItem.textContent = userInputs;
-  inputList.appendChild(inputListItem);
+  if (userInputs.length < 5){
+    let userIng = event.target.userInput.value.toLowerCase();
+    userInputs.push(userIng);
+    let inputListItem = document.createElement('li');
+    inputListItem.textContent = userIng;
+    inputList.appendChild(inputListItem);
+  } else {
+    message('more than 5 items');
+  }
 }
+
 
 function handleGenerate(event){
   event.preventDefault();
+  genDiv.innerHTML = '';
   if (inputForm.contains(sorryMessage)) {
     inputForm.removeChild(sorryMessage);
   }
   let generatedRecipe = '';
-  for (let index = 0; index < arrayOfDinners.length; index++) {
-    if(arrayOfDinners[index].generate(userInputs)){
-      generatedRecipe = arrayOfDinners[index];
-      break;
+  for (let i = 0; i < userInputs.length; i++) {
+    for (let index = 0; index < arrayOfDinners.length; index++) {
+      if(arrayOfDinners[index].generate(userInputs[i])){
+        generatedRecipe = arrayOfDinners[index];
+        break;
+      }
     }
   }
   if(generatedRecipe === ''){
     if (!inputForm.contains(sorryMessage)) {
-      message();
+      message('match');
     }
   } else {
     generatedRecipe.display();
@@ -159,7 +172,7 @@ function handleDelete() {
   if(inputList.lastChild.textContent !== 'List of ingredients:'){
     inputList.removeChild(inputList.lastChild);
   }
-  userInputs = 0;
+  userInputs.pop();
 }
 
 // Save dinner data in local storage
@@ -175,7 +188,7 @@ function getDinnerFromLocalStorage() {
   }
 }
 
-// listener
+// listeners
 document.addEventListener('DOMContentLoaded', handleContentLoaded); // got this event listener from chatgpt
 inputForm.addEventListener('submit', handleSubmit);
 genButton.addEventListener('click', handleGenerate);
