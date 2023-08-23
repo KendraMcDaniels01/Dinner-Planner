@@ -51,8 +51,8 @@ let chickenparmesanDinner = new Dinner('chickenparmesan', chickenparmesanIngList
 let stuffedgreenpepperDinner = new Dinner('stuffedgreenpepper',stuffedgreenpepperIngList, 'Stuffed Green Peppers');
 
 
-function checkIngredient(x){ // function code from W3Schools
-  return x !== userInputs;
+function checkIngredient(x){ // function code from stack overflow
+  return x = x.filter(val => !userInputs.includes(val));
 }
 
 function message(type){
@@ -66,21 +66,20 @@ function message(type){
 
 //prototype functions
 
-
 Dinner.prototype.generate = function(userIngredients){
   return this.arrayIng.includes(userIngredients);
 };
 
 // displays all ingredients for the recipe except the user inputs
 Dinner.prototype.shopping = function(){
-  let shoppingList = this.arrayIng;
-  shoppingList = shoppingList.filter(checkIngredient);
+  let shoppingList = checkIngredient(this.arrayIng);
+  console.log(shoppingList);
   let listOutput = document.createElement('ul');
   listOutput.setAttribute('id','shopping');
   listOutput.textContent = 'Shopping List:';
   genDiv.appendChild(listOutput);
   genDiv.style.borderRadius = '8px';
-  genDiv.style.backgroundColor = 'lightgoldenrodyellow';
+  genDiv.style.backgroundColor = '#97BC62';
   for (let index = 0; index < shoppingList.length; index++){
     let shoppingListItem = document.createElement('li');
     shoppingListItem.textContent = shoppingList[index];
@@ -94,6 +93,7 @@ Dinner.prototype.display = function(){
   let imgOutput = document.createElement('img');
   genDinnerTitle.innerText = this.title;
   genDinnerTitle.style.padding = '10px';
+  genDinnerTitle.style.borderRadius = '8px';
   imgOutput.src = this.picture;
   imgOutput.title = this.title+ ' image from foodnetwork.com';
   imgOutput.alt = this.title;

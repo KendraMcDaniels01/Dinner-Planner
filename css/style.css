@@ -60,7 +60,8 @@ ul {
 
 
 ul#user-ingredient {
-  background-color: peachpuff;
+  background-color: #2C5F2D;
+  color: #fff;
   padding: 10px;
   margin: 10px;
 }
@@ -114,6 +115,7 @@ div#gen-output {
 
 div#gen-output img {
   max-width: 50%;
+  min-width: 600px;
   object-fit: scale-down;
 }
 
@@ -139,7 +141,7 @@ section {
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
-  background-color: lightgoldenrodyellow;
+  background-color: #97BC62;
 }
 
 img#recipe-img {
