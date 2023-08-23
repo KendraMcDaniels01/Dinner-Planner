@@ -115,7 +115,6 @@ div#gen-output {
 
 div#gen-output img {
   max-width: 50%;
-  min-width: 600px;
   object-fit: scale-down;
 }
 
